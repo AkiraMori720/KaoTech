@@ -29,7 +29,7 @@ class Register extends Component {
     }
   }
 
-  
+
   validateEmail = (email) => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -62,7 +62,7 @@ class Register extends Component {
                       Free Register
                     </h4>
                     <p className="text-muted text-center">
-                      Get your free Veltrix account now.
+                      Get your free KaoTech account now.
                     </p>
 
                     <form className="mt-4" action="#">
@@ -110,7 +110,7 @@ class Register extends Component {
                       <Row className="form-group mt-2 mb-0">
                         <div className="col-12 mt-3">
                           <p className="mb-0">
-                            By registering you agree to the Veltrix{" "}
+                            By registering you agree to the KaoTech{" "}
                             <Link to="#" className="text-primary">
                               Terms of Use
                             </Link>
@@ -131,9 +131,7 @@ class Register extends Component {
                         </Link>{" "}
                       </p>
                       <p>
-                        © {new Date().getFullYear()} Veltrix. Crafted with{" "}
-                        <i className="mdi mdi-heart text-danger"></i> by
-                        Themesbrand
+                        © {new Date().getFullYear()} KaoTech.
                       </p>
                     </div>
                   </div>

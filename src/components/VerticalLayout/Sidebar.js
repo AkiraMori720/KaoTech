@@ -3,8 +3,20 @@ import { withRouter, Link } from "react-router-dom";
 import MetisMenu from "metismenujs";
 
 import SimpleBar from "simplebar-react";
+import { initBackendAPI } from "../../helpers/backend";
 
 const SidebarContent = props => {
+  const backendAPI = initBackendAPI();
+  const user = backendAPI.getAuthenticatedUser();
+  const role = user.role;
+  //const role = 'police';
+
+  const permissions = {
+    'police': ['police'],
+    'government': ['police', 'government'],
+    'admin': ['police', 'government', 'kaotech']
+  };
+  const user_permissions = permissions[role];
   return (
     <div id="sidebar-menu">
       <ul className="metismenu list-unstyled" id="side-menu">
@@ -17,66 +29,112 @@ const SidebarContent = props => {
         </li>
 
         <li className="menu-title">Main</li>
+        {/*POLICE Database */}
+        {
+          user_permissions.includes('police')?
+            <>
+              <li>
+                <Link to="/#" className="has-arrow waves-effect">
+                  <i className="ti-email"></i>
+                  <span>DRIVERS LIST</span>
+                </Link>
+                <ul className="sub-menu" aria-expanded="false">
+                  <li>
+                    <Link to="/active_drivers">ACTIVE DRIVERS</Link>
+                  </li>
+                  <li>
+                    <Link to="/wanted_drivers">WANTED DRIVERS</Link>
+                  </li>
+                  <li>
+                    <Link to="/delinquent_drivers">TAX DELINQUENT DRIVERS</Link>
+                  </li>
+                </ul>
+              </li>
 
-        <li>
-          <Link to="/#" className="has-arrow waves-effect">
-            <i className="ti-email"></i>
-            <span>Product Control</span>
-          </Link>
-          <ul className="sub-menu" aria-expanded="false">
-            <li>
-              <Link to="/constraints-log">Constraints Log</Link>
-            </li>
-            <li>
-              <Link to="/make-ready-plan">MakeReady Plan</Link>
-            </li>
-            <li>
-              <Link to="/commitment-plan">Commitment Plan</Link>
-            </li>
-            <li>
-              <Link to="/standard-process-library">Standard Process Library</Link>
-            </li>
-            <li>
-              <Link to="/analytics">Analytics</Link>
-            </li>
-          </ul>
-        </li>
+              <li>
+                <Link to="/check_drivers" className="has-arrow waves-effect">
+                  <i className="ti-package"></i>
+                  <span>CHECK DRIVER</span>
+                </Link>
+              </li>
 
-        <li>
-          <Link to="/#" className="has-arrow waves-effect">
-            <i className="ti-package"></i>
-            <span>Digital Design</span>
-          </Link>
-          <ul className="sub-menu" aria-expanded="false">
-            <li>
-              <Link to="digital-design-view">View </Link>
-            </li>
-          </ul>
-        </li>
+              <li>
+                <Link to="/launch_emergency" className="has-arrow waves-effect">
+                  <i className="ti-receipt"></i>
+                  <span>LAUNCH EMERGENCY</span>
+                </Link>
+              </li>
 
-        <li>
-          <Link to="/#" className="has-arrow waves-effect">
-            <i className="ti-receipt"></i>
-            <span>Project Attributes</span>
-          </Link>
-          <ul className="sub-menu" aria-expanded="false">
-            <li>
-              <Link to="project-attributes">Project Attributes</Link>
-            </li>
-          </ul>
-        </li>
+              <li>
+                <Link to="/add_summons" className="has-arrow waves-effect">
+                  <i className="ti-pie-chart"></i>
+                  <span>ADD SUMMONS</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/troubled_drivers" className="has-arrow waves-effect">
+                  <i className="ti-pie-chart"></i>
+                  <span>TROUBLE DRIVERS</span>
+                </Link>
+              </li>
+            </>
+           : null
+        }
 
-        <li>
-          <Link to="/#" className="has-arrow waves-effect">
-            <i className="ti-pie-chart"></i>
-            <span>Project Collaborators</span>
-          </Link>
-          <ul className="sub-menu" aria-expanded="false">
-            <li>
-              <Link to="project-collaborators">Collaborators</Link>
-            </li>
-          </ul>
-        </li>
+
+        {/*Government Database*/}
+        {
+          user_permissions.includes('government')?
+              <>
+                <li>
+                  <Link to="/search_drivers" className="has-arrow waves-effect">
+                    <i className="ti-package"></i>
+                    <span>ALL DRIVERS</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/stop_emergency" className="has-arrow waves-effect">
+                    <i className="ti-email"></i>
+                    <span>STOP EMERGENCY</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/tax_status" className="has-arrow waves-effect">
+                    <i className="ti-receipt"></i>
+                    <span>TAX STATUS</span>
+                  </Link>
+                </li>
+              </> :
+              null
+        }
+
+
+        {/*KAOTECH*/}
+        {
+          user_permissions.includes('kaotech')?
+              <>
+                <li>
+                <Link to="/drivers" className="has-arrow waves-effect">
+                  <i className="ti-package"></i>
+                  <span>DRIVER REGISTRATION</span>
+                </Link>
+              </li>
+                <li>
+                  <Link to="/polices" className="has-arrow waves-effect">
+                    <i className="ti-email"></i>
+                    <span>POLICE PRECINCT REGISTRATION</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/governments" className="has-arrow waves-effect">
+                    <i className="ti-receipt"></i>
+                    <span>GOVERNMENT REGISTRATION</span>
+                  </Link>
+                </li>
+              </>:
+              null
+        }
+
       </ul>
     </div>
   );

@@ -11,7 +11,7 @@ class CreatePassword extends Component {
   constructor(props) {
     super(props);
     const { history, location } = props;
-    
+
     let id = location.search.replace("?id=", "");
     if(!id || !id.length){
       history.push('/login');
@@ -78,7 +78,7 @@ class CreatePassword extends Component {
                       Free Register
                     </h4>
                     <p className="text-muted text-center">
-                      Get your free Veltrix account now.
+                      Get your free KaoTech account now.
                     </p>
 
                     <form className="mt-4" action="#">

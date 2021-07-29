@@ -5,46 +5,52 @@ import { Redirect } from "react-router-dom";
 import Login from "../pages/Authentication/Login";
 import Logout from "../pages/Authentication/Logout";
 import Register from "../pages/Authentication/Register";
-import ForgetPwd from "../pages/Authentication/FogetPassword";
+import VerifyCode from "../pages/Authentication/VerifyCode";
 import CreatePwd from "../pages/Authentication/CreatePassword";
 
 // Dashboard
 import Dashboard from "../pages/Dashboard";
 
-// Product Control
-import ConstraintsLog from "../pages/ProductControl/constraints-log";
-import CommitmentPlan from "../pages/ProductControl/commitment-plan";
-import MakeReadyPlan from "../pages/ProductControl/make-ready-plan";
-import StandardProcessLibrary from "../pages/ProductControl/standard-process-library";
-import Analytics from "../pages/ProductControl/analytics";
+//Police
+import ActiveDrivers from "../pages/police/ActiveDrivers";
+import WantedDrivers from "../pages/police/WantedDrivers";
+import DelinquentDrivers from "../pages/police/DelinquentDrivers";
+import CheckDrivers from "../pages/police/CheckDrivers";
+import LaunchEmergency from "../pages/police/LaunchEmergency";
 
-// Digital Design
-import DigitalDesignView from "../pages/DigitalDesign/view";
+//Government
+import SearchDrivers from "../pages/government/SearchDrivers";
+import StopEmergency from "../pages/government/StopEmergency";
+import TaxStatus from "../pages/government/TaxStatus";
 
-// Project Attributes
-import ProjectAttributes from "../pages/ProjectAttributes/project-attributes";
-
-// Project Collaborators
-import ProjectCollaborators from "../pages/ProjectCollaborators/collaborators";
+// KaoTech
+import Drivers from "../pages/kaotech/Drivers";
+import Polices from "../pages/kaotech/Polices";
+import Governments from "../pages/kaotech/Governments";
+import TroubledDrivers from "../pages/police/TroubledDrivers";
+import AddSummons from "../pages/police/AddSummons";
 
 
 const authProtectedRoutes = [
-  // Product Control
-  { path: "/constraints-log", component: ConstraintsLog },
-  { path: "/make-ready-plan", component: MakeReadyPlan },
-  { path: "/commitment-plan", component: CommitmentPlan },
-  { path: "/standard-process-library", component: StandardProcessLibrary },
-  { path: "/analytics", component: Analytics },
-  
-  // Digital Design
-  { path: "/digital-design-view", component: DigitalDesignView }, 
-  
-  // Project Attributes
-  { path: "/project-attributes", component: ProjectAttributes },
-  
-  // Project Collaborators
-  { path: "/project-collaborators", component: ProjectCollaborators },
-  
+    // Police
+  { path: "/active_drivers", component: ActiveDrivers },
+  { path: "/wanted_drivers", component: WantedDrivers },
+  { path: "/delinquent_drivers", component: DelinquentDrivers },
+  { path: "/check_drivers", component: CheckDrivers },
+  { path: "/launch_emergency", component: LaunchEmergency },
+  { path: "/add_summons", component: AddSummons },
+  { path: "/troubled_drivers", component: TroubledDrivers },
+
+    //Government
+  { path: "/search_drivers", component: SearchDrivers },
+  { path: "/stop_emergency", component: StopEmergency },
+  { path: "/tax_status", component: TaxStatus },
+
+    // KAOTECH
+  { path: "/drivers", component: Drivers },
+  { path: "/polices", component: Polices },
+  { path: "/governments", component: Governments },
+
   // Dashboard
   { path: "/dashboard", component: Dashboard },
   { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
@@ -53,7 +59,7 @@ const authProtectedRoutes = [
 const publicRoutes = [
   { path: "/logout", component: Logout },
   { path: "/login", component: Login },
-  { path: "/forget-password", component: ForgetPwd },
+  { path: "/verify", component: VerifyCode },
   { path: "/register", component: Register },
   { path: "/create-password", component: CreatePwd}
 ];

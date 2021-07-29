@@ -24,7 +24,6 @@ class ProfileMenu extends Component {
     onLogout = () => {
         const { history } = this.props;
         this.setState({openLogoutDlg: false});
-        localStorage.removeItem('token');
         localStorage.removeItem('authUser');
         history.push('/login');
     }
@@ -38,8 +37,8 @@ class ProfileMenu extends Component {
                     <i className="mdi mdi-account-circle font-size-36 align-middle mr-1"></i>
                     </DropdownToggle>
                     <DropdownMenu right>
-                        <DropdownItem tag="a" href="#"><i className="mdi mdi-account-circle font-size-17 align-middle mr-1"></i>Profile</DropdownItem>
-                        <div className="dropdown-divider"></div>
+                        {/*<DropdownItem tag="a" href="#"><i className="mdi mdi-account-circle font-size-17 align-middle mr-1"></i>Profile</DropdownItem>*/}
+                        {/*<div className="dropdown-divider"></div>*/}
                         <div
                             onClick={(e) => this.setState({openLogoutDlg: true})}
                             className="dropdown-item">
@@ -47,7 +46,7 @@ class ProfileMenu extends Component {
                             <span>Logout</span>
                         </div>
                     </DropdownMenu>
-                    { openLogoutDlg ? 
+                    { openLogoutDlg ?
                         <SweetAlert
                       title="Are you sure you want to log out?"
                       warning
@@ -59,7 +58,7 @@ class ProfileMenu extends Component {
                       onCancel={() => this.setState({openLogoutDlg: false})}
                     >
                     </SweetAlert>
-                    : 
+                    :
                     null}
                 </Dropdown>
             </React.Fragment>

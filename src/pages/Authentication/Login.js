@@ -9,6 +9,7 @@ import bg from "../../assets/images/bg.jpg";
 import logoDark from "../../assets/images/logo-dark.png";
 import { loginUser as loginUserAction } from "../../store/actions";
 import PropTypes from 'prop-types';
+import firebase from "firebase";
 
 
 class Login extends Component {
@@ -19,20 +20,39 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      is_passed_recaptcha: false
+    };
+  }
+
+  componentDidMount() {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(this.recaptcha, {
+      'size': 'normal',
+      'callback': (response) => {
+        // reCAPTCHA solved, allow signInWithPhoneNumber.
+        this.setState({is_passed_recaptcha: true});
+      },
+      'expired-callback': () => {
+        // Response expired. Ask user to solve reCAPTCHA again.
+        // ...
+      }
+    });
+    window.recaptchaVerifier.render().then(function (widgetId) {
+      window.recaptchaWidgetId = widgetId;
+    });
   }
 
   onLogin = (e) => {
     const { loginUser, history } = this.props;
-    let username = document.getElementById('username').value;
-    let userpassword = document.getElementById('userpassword').value;
-    if(username.trim().length && userpassword.trim().length){
-      loginUser({name: username, password: userpassword}, history);
+    let phonenumber = document.getElementById('phonenumber').value;
+    if(phonenumber.trim().length){
+      loginUser({phone: phonenumber}, history);
     }
     e.preventDefault();
   }
 
   render() {
+    const { is_passed_recaptcha } = this.state;
     return (
       <React.Fragment>
         {" "}
@@ -65,26 +85,18 @@ class Login extends Component {
 
                     <form className="mt-4" action="#">
                       <div className="form-group">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="phonenumber">PhoneNumber</label>
                         <input
                           type="text"
                           className="form-control"
-                          id="username"
-                          placeholder="Enter username"
+                          id="phonenumber"
+                          placeholder="Enter PhoneNumber"
                         />
                       </div>
 
-                      <div className="form-group">
-                        <label htmlFor="userpassword">Password</label>
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="userpassword"
-                          placeholder="Enter password"
-                        />
-                      </div>
+                      <div ref={(ref)=>this.recaptcha=ref}></div>
 
-                      <Row className="form-group">
+                      <Row className="form-group mt-4">
                         <Col sm={6}>
                           <div className="custom-control custom-checkbox">
                             <input
@@ -103,6 +115,7 @@ class Login extends Component {
 
                         <Col sm="6" className="text-right">
                           <button
+                              disabled={!is_passed_recaptcha}
                             className="btn btn-primary w-md waves-effect waves-light"
                             onClick={this.onLogin}
                           >
@@ -111,31 +124,29 @@ class Login extends Component {
                         </Col>
                       </Row>
 
-                      <Row className="form-group mt-2 mb-0">
-                        <div className="col-12 mt-3">
-                          <Link to="forget-password">
-                            <i className="mdi mdi-lock"></i> Forgot your
-                            password?
-                          </Link>
-                        </div>
-                      </Row>
+                      {/*<Row className="form-group mt-2 mb-0">*/}
+                      {/*  <div className="col-12 mt-3">*/}
+                      {/*    <Link to="forget-password">*/}
+                      {/*      <i className="mdi mdi-lock"></i> Forgot your*/}
+                      {/*      password?*/}
+                      {/*    </Link>*/}
+                      {/*  </div>*/}
+                      {/*</Row>*/}
                     </form>
 
                     <div className="mt-5 pt-4 text-center">
+                      {/*<p>*/}
+                      {/*  Don't have an account ?{" "}*/}
+                      {/*  <Link*/}
+                      {/*    to="register"*/}
+                      {/*    className="font-weight-medium text-primary"*/}
+                      {/*  >*/}
+                      {/*    {" "}*/}
+                      {/*    Signup now{" "}*/}
+                      {/*  </Link>{" "}*/}
+                      {/*</p>*/}
                       <p>
-                        Don't have an account ?{" "}
-                        <Link
-                          to="register"
-                          className="font-weight-medium text-primary"
-                        >
-                          {" "}
-                          Signup now{" "}
-                        </Link>{" "}
-                      </p>
-                      <p>
-                        © {new Date().getFullYear()} KaoTech. Crafted with{" "}
-                        <i className="mdi mdi-heart text-danger"></i> by
-                        Themesbrand
+                        © {new Date().getFullYear()} KaoTech.
                       </p>
                     </div>
                   </div>

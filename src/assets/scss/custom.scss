@@ -1,0 +1,38 @@
+svg.create-book-photo-icon{
+  width: 25px!important;
+  height: 25px!important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+div.create-book-image-preview-icon-container{
+  width: 30px!important;
+  height: 30px!important;
+}
+div.create-book-image-preview-container{
+  z-index: 1!important;
+}
+svg.create-book-image-preview-icon{
+  width: 15px!important;
+  height: 15px!important;
+}
+
+.table th, .table td{
+  vertical-align: unset!important;
+}
+
+.red-circle{
+  background-color: red;
+  border-radius: 16px;
+  display: inline-block;
+  padding: 0 8px;
+  color: white;
+}
+.modal--content{
+  padding: 20px;
+}
+
+.emergency--comment{
+  height: 120px !important;
+}
