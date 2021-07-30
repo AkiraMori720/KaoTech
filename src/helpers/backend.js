@@ -80,7 +80,8 @@ class FirebaseAuthBackend {
                     },
                     error => {
                         console.log('user error', error);
-                        reject(this._handleError(error));
+                        alert('Invalid Phone Number');
+                        //reject(this._handleError(error));
                     }
                 );
         });
@@ -340,15 +341,15 @@ let _fireBaseBackend = null;
  * Returns the firebase backend
  */
 const firebaseConfig = {
-    apiKey: "AIzaSyCiHzkzrehtcOBaCRHvfI9Tx3qIhS6lrLM",
-    authDomain: "kaotech-914d6.firebaseapp.com",
-    projectId: "kaotech-914d6",
-    storageBucket: "kaotech-914d6.appspot.com",
-    messagingSenderId: "420949702003",
-    appId: "1:420949702003:web:4886b19627bf17c9e28106",
-    measurementId: "G-YV8DKEBJPF"
+    apiKey: "AIzaSyDxZ0qrWBRaC5Lb4IieW-pN0f0PpEGqlj4",
+    authDomain: "islamik-by-kaotech.firebaseapp.com",
+    databaseURL: "https://islamik-by-kaotech.firebaseio.com",
+    projectId: "islamik-by-kaotech",
+    storageBucket: "islamik-by-kaotech.appspot.com",
+    messagingSenderId: "413068111620",
+    appId: "1:413068111620:web:320abdf30e18d1e540ea51",
+    measurementId: "G-YRZ4DGJWTK"
 };
-
 
 /**
  * Initilize the backend
