@@ -46,6 +46,9 @@ class Login extends Component {
     const { loginUser, history } = this.props;
     let phonenumber = document.getElementById('phonenumber').value;
     if(phonenumber.trim().length){
+      if(phonenumber[0] !== '+'){
+        phonenumber = '+' + phonenumber;
+      }
       loginUser({phone: phonenumber}, history);
     }
     e.preventDefault();

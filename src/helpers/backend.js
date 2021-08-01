@@ -216,7 +216,11 @@ class FirebaseAuthBackend {
             }
         })
     };
-
+    equalPhoneNumber = (number1, number2) => {
+       const pNumber1 = number1.replace('+', '');
+       const pNumber2 = number2.replace('+', '');
+       return pNumber1 === pNumber2
+    };
     getRole = async (phone_number, passcode) => {
         // Kaotech
         const kaotechs = await firebase.firestore()
@@ -225,7 +229,7 @@ class FirebaseAuthBackend {
 
         let role = null;
         kaotechs.forEach(k => {
-            if (k.data().phone_number === phone_number && k.data().passcode === passcode) {
+            if (this.equalPhoneNumber(k.data().phone_number, phone_number) && k.data().passcode === passcode) {
                 role = 'admin';
             }
         });
@@ -238,7 +242,7 @@ class FirebaseAuthBackend {
             .collection(TBL_GOVERNMENTS)
             .get();
         governments.forEach(k => {
-            if (k.data().phone_number === phone_number && k.data().passcode === passcode) {
+            if (this.equalPhoneNumber(k.data().phone_number, phone_number) && k.data().passcode === passcode) {
                 role = 'government';
             }
         });
@@ -251,7 +255,7 @@ class FirebaseAuthBackend {
             .collection(TBL_POLICES)
             .get();
         polices.forEach(k => {
-            if (k.data().phone_number === phone_number && k.data().passcode === passcode) {
+            if (this.equalPhoneNumber(k.data().phone_number, phone_number) && k.data().passcode === passcode) {
                 role = 'police';
             }
         });
@@ -340,16 +344,30 @@ let _fireBaseBackend = null;
 /**
  * Returns the firebase backend
  */
-const firebaseConfig = {
-    apiKey: "AIzaSyDxZ0qrWBRaC5Lb4IieW-pN0f0PpEGqlj4",
-    authDomain: "islamik-by-kaotech.firebaseapp.com",
-    databaseURL: "https://islamik-by-kaotech.firebaseio.com",
-    projectId: "islamik-by-kaotech",
-    storageBucket: "islamik-by-kaotech.appspot.com",
-    messagingSenderId: "413068111620",
-    appId: "1:413068111620:web:320abdf30e18d1e540ea51",
-    measurementId: "G-YRZ4DGJWTK"
-};
+
+let firebaseConfig = {};
+if(process.env.NODE_ENV === 'development'){
+    firebaseConfig = {
+        apiKey: "AIzaSyCiHzkzrehtcOBaCRHvfI9Tx3qIhS6lrLM",
+        authDomain: "kaotech-914d6.firebaseapp.com",
+        projectId: "kaotech-914d6",
+        storageBucket: "kaotech-914d6.appspot.com",
+        messagingSenderId: "420949702003",
+        appId: "1:420949702003:web:4886b19627bf17c9e28106",
+        measurementId: "G-YV8DKEBJPF"
+    };
+} else {
+    firebaseConfig = {
+        apiKey: "AIzaSyDxZ0qrWBRaC5Lb4IieW-pN0f0PpEGqlj4",
+        authDomain: "islamik-by-kaotech.firebaseapp.com",
+        databaseURL: "https://islamik-by-kaotech.firebaseio.com",
+        projectId: "islamik-by-kaotech",
+        storageBucket: "islamik-by-kaotech.appspot.com",
+        messagingSenderId: "413068111620",
+        appId: "1:413068111620:web:320abdf30e18d1e540ea51",
+        measurementId: "G-YRZ4DGJWTK"
+    };
+}
 
 /**
  * Initilize the backend

@@ -2,6 +2,7 @@
   "name": "veltrix",
   "version": "1.0.0",
   "private": true,
+  "homepage": "/kaotech/",
   "dependencies": {
     "@fullcalendar/bootstrap": "^4.3.0",
     "@fullcalendar/daygrid": "^4.3.0",

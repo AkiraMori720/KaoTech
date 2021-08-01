@@ -48,7 +48,7 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <Router>
+        <Router basename="/kaotech">
           <Switch>
             {publicRoutes.map((route, idx) => (
               <AppRoute
