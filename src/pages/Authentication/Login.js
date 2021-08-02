@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 // import images
 import bg from "../../assets/images/bg.jpg";
-import logoDark from "../../assets/images/logo-dark.png";
+import logoDark from "../../assets/images/logo.png";
 import { loginUser as loginUserAction } from "../../store/actions";
 import PropTypes from 'prop-types';
 import firebase from "firebase";
@@ -73,9 +73,9 @@ class Login extends Component {
               <div className="account-box">
                 <div className="card-box shadow-none p-4">
                   <div className="p-2">
-                    <div className="text-center mt-4">
+                    <div className="text-center">
                       <Link to="/">
-                        <img src={logoDark} height="22" alt="logo" />
+                        <img src={logoDark} height="300" alt="logo" />
                       </Link>
                     </div>
 

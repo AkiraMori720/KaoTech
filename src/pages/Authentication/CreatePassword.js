@@ -5,7 +5,7 @@ import { getBackendAPI } from "../../helpers/backend";
 
 // import images
 import bg from "../../assets/images/bg.jpg";
-import logoDark from "../../assets/images/logo-dark.png";
+import logoDark from "../../assets/images/logo.png";
 
 class CreatePassword extends Component {
   constructor(props) {

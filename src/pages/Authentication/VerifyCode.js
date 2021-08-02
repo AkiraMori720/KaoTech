@@ -3,7 +3,7 @@ import {Row, Card, Dropdown} from "reactstrap";
 import { Link } from "react-router-dom";
 // import images
 import bg from "../../assets/images/bg.jpg";
-import logoDark from "../../assets/images/logo-dark.png";
+import logoDark from "../../assets/images/logo.png";
 import {loginSuccess as LoginSuccessAction} from "../../store/auth/login/actions";
 import { initBackendAPI } from "../../helpers/backend";
 import {connect} from "react-redux";
@@ -75,9 +75,9 @@ class VerifyCodePage extends Component {
               <div className="account-box">
                 <div className="card-box shadow-none p-4">
                   <div className="p-2">
-                    <div className="text-center mt-4">
+                    <div className="text-center">
                       <Link to="/">
-                        <img src={logoDark} height="22" alt="logo" />
+                        <img src={logoDark} height="300" alt="logo" />
                       </Link>
                     </div>
 
